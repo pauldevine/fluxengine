@@ -470,6 +470,7 @@ buildlibrary libbackend.a \
     lib/imagewriter/imgimagewriter.cc \
     lib/imagewriter/ldbsimagewriter.cc \
     lib/imagewriter/nsiimagewriter.cc \
+    lib/imagewriter/rawimagewriter.cc \
     lib/ldbs.cc \
     lib/proto.cc \
     lib/reader.cc \
@@ -560,6 +561,9 @@ buildlibrary libfrontend.a \
     src/fe-write.cc \
     src/fluxengine.cc \
 
+buildlibrary libgui.a \
+    src/gui/main.cc
+
 buildprogram fluxengine \
     libfrontend.a \
     libformats.a \
@@ -569,6 +573,10 @@ buildprogram fluxengine \
     libusbp.a \
     libfmt.a \
     libagg.a \
+
+buildprogram fluxengine-gui \
+    -rule linkgui \
+    libgui.a
 
 buildlibrary libemu.a \
     dep/emu/fnmatch.c
