@@ -87,12 +87,12 @@ public:
 		auto bytes = decode(firstBytes).slice(0, 4);
     	
 		uint8_t headerId = bytes[0];
-
+std::string myHeader = "";
 if (headerId != VICTOR9K_HEADER_ID) {
-			fprintf(stdout, "didn\'t match VICTOR9K_HEADER_ID\n");
+			myHeader = "  ▶︎▶︎▶︎▶︎▶︎▶︎ Missing VICTOR9K_HEADER_ID\n";
 			return;
 		} else {
-			fprintf(stdout, "did match VICTOR9K_HEADER_ID\n");
+			myHeader = "  ✔︎ VICTOR9K_HEADER_ID\n";
 }
 
 		uint8_t rawTrack = bytes[1];
@@ -103,8 +103,9 @@ fprintf(stdout, "headerId: %i, rawTrack: %i, gotChecksum: %i\n",
 		_sector->logicalTrack = rawTrack & 0x7f;
 		_sector->logicalSide = rawTrack >> 7;
 		uint8_t wantChecksum = bytes[1] + bytes[2];
-fprintf(stdout, "logicalSide: %i logicalTrack: %i logicalSector: %i \n",
+fprintf(stdout, "logicalSide: %i logicalTrack: %i logicalSector: %i",
 			 _sector->logicalSide, _sector->logicalTrack , _sector->logicalSector);
+std::cout<<myHeader + "\n";
 		if ((_sector->logicalSector > 20) || (_sector->logicalTrack > 85) || (_sector->logicalSide > 1))
 			return;
 
@@ -130,10 +131,10 @@ fprintf(stdout, "logicalSide: %i logicalTrack: %i logicalSector: %i \n",
 std::cout<<"dataIdByte: "; 
 		/* Check that this is actually a data record. */
 		if (dataIdByte[0] != VICTOR9K_DATA_ID) {
-			fprintf(stdout, "didn\'t match VICTOR9K_DATA_ID\n");
+std::cout<<"  ▶︎▶︎▶︎▶︎▶︎▶︎ missing VICTOR9K_DATA_ID\n";
 			return;
 		} else {
-			fprintf(stdout, "did match VICTOR9K_DATA_ID\n");
+std::cout<<"  ✔︎ VICTOR9K_DATA_ID\n";
 		}
 
 		/* Read data. */
