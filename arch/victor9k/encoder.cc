@@ -96,6 +96,8 @@ static void write_sector(std::vector<bool>& bits, unsigned& cursor,
 
     uint8_t encodedTrack = sector.logicalTrack | (sector.logicalSide<<7);
     uint8_t encodedSector = sector.logicalSector;
+    fprintf(stdout, "encodedTrack: %i, encodedSector: %i, headerId: %i\n",
+		encodedTrack, encodedSector, VICTOR9K_HEADER_ID);
     write_bytes(bits, cursor, Bytes {
         encodedTrack,
         encodedSector,
