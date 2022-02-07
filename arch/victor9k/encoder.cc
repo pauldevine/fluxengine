@@ -92,7 +92,8 @@ static void write_sector(std::vector<bool>& bits, unsigned& cursor,
         const Sector& sector)
 {
     write_one_bits(bits, cursor, trackdata.pre_header_sync_bits());
-    write_bits(bits, cursor, VICTOR9K_SECTOR_RECORD, 10);
+    write_bits(bits,cursor,0xd57,12);
+    //write_bits(bits, cursor, VICTOR9K_SECTOR_RECORD, 10);
 
     uint8_t encodedTrack = sector.logicalTrack | (sector.logicalSide<<7);
     uint8_t encodedSector = sector.logicalSector;
