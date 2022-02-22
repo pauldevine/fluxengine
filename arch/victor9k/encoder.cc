@@ -103,7 +103,8 @@ static void write_sector(std::vector<bool>& bits, unsigned& cursor,
     });
 
 
-    write_zero_bits(bits, cursor, trackdata.post_header_gap_bits());
+    //write_zero_bits(bits, cursor, trackdata.post_header_gap_bits());	
+    fillBitmapTo(bits, cursor, trackdata.post_header_gap_bits(), {true, false});
     write_one_bits(bits, cursor, trackdata.pre_data_sync_bits());
     write_bits(bits, cursor, VICTOR9K_DATA_RECORD, 10);
 
@@ -113,7 +114,8 @@ static void write_sector(std::vector<bool>& bits, unsigned& cursor,
     checksum.writer().write_le16(sumBytes(sector.data));
     write_bytes(bits, cursor, checksum);
 
-    write_zero_bits(bits, cursor, trackdata.post_data_gap_bits());
+    //write_zero_bits(bits, cursor, trackdata.post_data_gap_bits());
+    fillBitmapTo(bits, cursor, trackdata.post_data_gap_bits(), {true, false});
 }
 
 class Victor9kEncoder : public AbstractEncoder
