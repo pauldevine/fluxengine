@@ -104,7 +104,9 @@ static void write_sector(std::vector<bool>& bits, unsigned& cursor,
 
 
     //write_zero_bits(bits, cursor, trackdata.post_header_gap_bits());	
-    fillBitmapTo(bits, cursor, trackdata.post_header_gap_bits(), {true, false});
+    //fillBitmapTo(bits, cursor, trackdata.post_header_gap_bits(), {true, false});
+    Bytes post_header_gap_bytes("000000");
+    write_bytes(bits, cursor, post_header_gap_bytes);
     write_one_bits(bits, cursor, trackdata.pre_data_sync_bits());
     write_bits(bits, cursor, VICTOR9K_DATA_RECORD, 10);
 

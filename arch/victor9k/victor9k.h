@@ -12,7 +12,7 @@ class DecoderProto;
 
 /* ... 1101 0100 1001
  *       ^^ ^^^^ ^^^^ ten bit IO byte */
-#define VICTOR9K_DATA_RECORD   0xfffffd49
+#define VICTOR9K_DATA_RECORD   0xffffffffffffd49
 
 #define VICTOR9K_SECTOR_LENGTH 512
 
