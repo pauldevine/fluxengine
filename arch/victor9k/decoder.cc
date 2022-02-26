@@ -68,11 +68,14 @@ public:
 	{
 		/* Check the ID. */
 
-		if (readRaw32() != VICTOR9K_SECTOR_RECORD)
+		if (readRaw32() != VICTOR9K_SECTOR_RECORD) {
+			fprintf(stdout, "  ▶︎▶︎▶︎▶︎▶︎▶︎ Missing VICTOR9K_HEADER_ID\n");
 			return;
+		}
 
+		fprintf(stdout, "  ✔︎ VICTOR9K_HEADER_ID\n");
+		
 		/* Read header. */
-
 		auto bytes = decode(readRawBits(3*10)).slice(0, 3);
 
 		uint8_t rawTrack = bytes[0];
@@ -88,9 +91,10 @@ public:
 		if (wantChecksum == gotChecksum)
 			_sector->status = Sector::DATA_MISSING; /* unintuitive but correct */
 	}
-
+    
     void decodeDataRecord()
 	{
+		
 		/* Check the ID. */
 
 		if (readRaw32() != VICTOR9K_DATA_RECORD)
@@ -107,6 +111,7 @@ public:
 		uint16_t wantChecksum = br.read_le16();
 		_sector->status = (gotChecksum == wantChecksum) ? Sector::OK : Sector::BAD_CHECKSUM;
 	}
+	
 };
 
 std::unique_ptr<AbstractDecoder> createVictor9kDecoder(const DecoderProto& config)
