@@ -114,7 +114,7 @@ static void write_sector(std::vector<bool>& bits, unsigned& cursor,
     checksum.writer().write_le16(sumBytes(sector.data));
     write_bytes(bits, cursor, checksum);
 
-    Bytes post_data_gap_bytes("00000");
+    Bytes post_data_gap_bytes("000000000000000000000000000000");
     write_bytes(bits, cursor, post_data_gap_bytes);
 }
 
