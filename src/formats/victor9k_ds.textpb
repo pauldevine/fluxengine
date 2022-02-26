@@ -287,7 +287,7 @@ image_writer {
 encoder {
 	victor9k {
 		trackdata {
-			original_data_rate_khz: 470
+			original_data_rate_khz: 468
 			post_index_gap_us: 500.0
 			pre_header_sync_bits: 150
 			post_header_gap_bits: 60
