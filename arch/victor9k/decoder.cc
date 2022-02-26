@@ -68,13 +68,9 @@ public:
 	{
 		/* Check the ID. */
 
-		if (readRaw32() != VICTOR9K_SECTOR_RECORD) {
-			fprintf(stdout, "  ▶︎▶︎▶︎▶︎▶︎▶︎ Missing VICTOR9K_HEADER_ID\n");
+		if (readRaw32() != VICTOR9K_SECTOR_RECORD)
 			return;
-		}
-
-		fprintf(stdout, "  ✔︎ VICTOR9K_HEADER_ID\n");
-		
+ 		
 		/* Read header. */
 		auto bytes = decode(readRawBits(3*10)).slice(0, 3);
 
